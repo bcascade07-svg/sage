@@ -1,13 +1,13 @@
 from flask import Flask, request, render_template
 from twilio.twiml.messaging_response import MessagingResponse
-from anthropic import Anthropic
+from groq import Groq
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
 
 app = Flask(__name__)
-client = Anthropic()
+client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 
 SYSTEM_PROMPT = """You are a kind, patient assistant helping older adults with everyday tasks.
 Keep your responses short, clear, and friendly. Use simple language — no jargon.
@@ -22,14 +22,16 @@ def index():
 def sms_reply():
     incoming = request.form.get("Body", "").strip()
 
-    message = client.messages.create(
-        model="claude-haiku-4-5-20251001",
+    completion = client.chat.completions.create(
+        model="llama3-8b-8192",
         max_tokens=300,
-        system=SYSTEM_PROMPT,
-        messages=[{"role": "user", "content": incoming}]
+        messages=[
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": incoming}
+        ]
     )
 
-    reply = message.content[0].text
+    reply = completion.choices[0].message.content
 
     response = MessagingResponse()
     response.message(reply)
