@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sage — AI Help by Text</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background: #faf9f6;
+      color: #1a1a1a;
+    }
+
+    nav {
+      background: #fff;
+      border-bottom: 1px solid #e8e4dc;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #2c6e49;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      font-size: 0.9rem;
+      font-weight: normal;
+      color: #999;
+      margin-left: 10px;
+      letter-spacing: 0;
+    }
+
+    /* HERO */
+    .hero {
+      max-width: 860px;
+      margin: 80px auto 60px;
+      padding: 0 40px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      line-height: 1.2;
+      color: #1a1a1a;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span { color: #2c6e49; }
+
+    .hero p {
+      font-size: 1.35rem;
+      color: #555;
+      line-height: 1.7;
+      max-width: 620px;
+      margin: 0 auto 40px;
+    }
+
+    .phone-box {
+      background: #2c6e49;
+      color: white;
+      border-radius: 16px;
+      padding: 40px;
+      max-width: 480px;
+      margin: 0 auto 80px;
+    }
+
+    .phone-box p {
+      font-size: 1.1rem;
+      color: #d4ede1;
+      margin-bottom: 12px;
+    }
+
+    .phone-number {
+      font-size: 2.6rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      color: white;
+      margin-bottom: 16px;
+    }
+
+    .phone-box small {
+      font-size: 0.95rem;
+      color: #a8d5bc;
+    }
+
+    /* ACCESSIBILITY */
+    .accessibility {
+      background: #f0f7f3;
+      padding: 80px 40px;
+      text-align: center;
+      border-top: 1px solid #d4ede1;
+      border-bottom: 1px solid #d4ede1;
+    }
+
+    .accessibility h2 {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+
+    .accessibility .subtitle {
+      font-size: 1.1rem;
+      color: #666;
+      max-width: 580px;
+      margin: 0 auto 50px;
+      line-height: 1.7;
+    }
+
+    .access-grid {
+      display: flex;
+      gap: 24px;
+      max-width: 860px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .access-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 28px 24px;
+      max-width: 240px;
+      text-align: center;
+      border: 1px solid #d4ede1;
+    }
+
+    .access-card .icon {
+      font-size: 2.2rem;
+      margin-bottom: 14px;
+    }
+
+    .access-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      color: #2c6e49;
+    }
+
+    .access-card p {
+      font-size: 0.95rem;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* EXAMPLES */
+    .examples {
+      background: #fff;
+      padding: 80px 40px;
+      text-align: center;
+    }
+
+    .examples h2 {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .examples .subtitle {
+      color: #777;
+      font-size: 1.1rem;
+      margin-bottom: 50px;
+    }
+
+    .cards {
+      display: flex;
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .card {
+      background: #faf9f6;
+      border: 1px solid #e8e4dc;
+      border-radius: 12px;
+      padding: 28px 24px;
+      max-width: 260px;
+      text-align: left;
+    }
+
+    .card .emoji {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+
+    .card .message {
+      background: #e8f4ed;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 1rem;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      font-style: italic;
+    }
+
+    .card .label {
+      font-size: 0.85rem;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* HOW IT WORKS */
+    .how {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      text-align: center;
+    }
+
+    .how h2 {
+      font-size: 2rem;
+      margin-bottom: 48px;
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      text-align: left;
+    }
+
+    .step {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      background: #2c6e49;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .step-text h3 {
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+    }
+
+    .step-text p {
+      font-size: 1rem;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* INQUIRY */
+    .inquiry {
+      background: #fff;
+      border-top: 1px solid #e8e4dc;
+      padding: 80px 40px;
+      text-align: center;
+    }
+
+    .inquiry h2 {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .inquiry .subtitle {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 40px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .inquiry form {
+      max-width: 520px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      text-align: left;
+    }
+
+    .inquiry label {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .inquiry input,
+    .inquiry select,
+    .inquiry textarea {
+      width: 100%;
+      padding: 14px 16px;
+      font-size: 1rem;
+      font-family: Georgia, serif;
+      border: 1px solid #d0ccc4;
+      border-radius: 8px;
+      background: #faf9f6;
+      color: #1a1a1a;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .inquiry input:focus,
+    .inquiry select:focus,
+    .inquiry textarea:focus {
+      border-color: #2c6e49;
+    }
+
+    .inquiry textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .inquiry button {
+      background: #2c6e49;
+      color: white;
+      border: none;
+      padding: 16px;
+      font-size: 1.1rem;
+      font-family: Georgia, serif;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .inquiry button:hover {
+      background: #235c3c;
+    }
+
+    .inquiry .alt-contact {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 0.95rem;
+      color: #888;
+    }
+
+    .inquiry .alt-contact a {
+      color: #2c6e49;
+      text-decoration: none;
+    }
+
+    footer {
+      background: #1a1a1a;
+      color: #aaa;
+      text-align: center;
+      padding: 32px;
+      font-size: 0.9rem;
+    }
+
+    footer span { color: #2c6e49; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">Sage <span>AI help by text</span></div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Helpful answers,<br/>sent right to <span>your phone.</span></h1>
+    <p>Sage brings the power of AI to anyone who can send a text — no apps, no passwords, no learning curve.</p>
+
+    <div class="phone-box">
+      <p>Text your question to</p>
+      <div class="phone-number">(555) 000-0000</div>
+      <small>Free to try &nbsp;·&nbsp; Works on any phone</small>
+    </div>
+  </div>
+
+  <!-- ACCESSIBILITY -->
+  <div class="accessibility">
+    <h2>Built for everyone</h2>
+    <p class="subtitle">Most AI tools assume you own a laptop, know your passwords, and grew up with the internet. Sage doesn't. If you can send a text, you can use Sage.</p>
+    <div class="access-grid">
+      <div class="access-card">
+        <div class="icon">📱</div>
+        <h3>No app to download</h3>
+        <p>Works with the texting app already on your phone — nothing new to install.</p>
+      </div>
+      <div class="access-card">
+        <div class="icon">🔑</div>
+        <h3>No account or password</h3>
+        <p>Just text the number. No sign-up, no email, no forms to fill out.</p>
+      </div>
+      <div class="access-card">
+        <div class="icon">🗣️</div>
+        <h3>Plain language always</h3>
+        <p>Sage responds clearly and simply — never with jargon or confusing tech speak.</p>
+      </div>
+      <div class="access-card">
+        <div class="icon">📞</div>
+        <h3>Any phone works</h3>
+        <p>Smartphone, basic phone, or anything in between — if it sends texts, it works.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXAMPLES -->
+  <div class="examples">
+    <h2>What can I ask?</h2>
+    <p class="subtitle">Anything you'd ask a knowledgeable friend.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="emoji">✉️</div>
+        <div class="message">"Help me write an email to my doctor about my knee pain"</div>
+        <div class="label">Writing help</div>
+      </div>
+      <div class="card">
+        <div class="emoji">📄</div>
+        <div class="message">"What does 'deductible' mean on my insurance bill?"</div>
+        <div class="label">Understanding documents</div>
+      </div>
+      <div class="card">
+        <div class="emoji">🎁</div>
+        <div class="message">"Give me ideas for a birthday gift for my 8-year-old granddaughter"</div>
+        <div class="label">Everyday tasks</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="how">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <h3>Save the number</h3>
+          <p>Add Sage to your contacts so it's always easy to find.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <h3>Text your question</h3>
+          <p>Type whatever you need help with, just like texting a friend. No special format required.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <h3>Get a clear answer</h3>
+          <p>You'll receive a helpful, plain-language response within seconds.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INQUIRY -->
+  <div class="inquiry">
+    <h2>Get in touch</h2>
+    <p class="subtitle">Interested in bringing Sage to your senior center, library, or community? We'd love to hear from you.</p>
+    <form action="/inquiry" method="POST">
+      <div>
+        <label for="name">Your name</label>
+        <input type="text" id="name" name="name" placeholder="Margaret Johnson" required />
+      </div>
+      <div>
+        <label for="email">Email address</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required />
+      </div>
+      <div>
+        <label for="type">I represent a...</label>
+        <select id="type" name="type">
+          <option value="">Select one</option>
+          <option value="senior_center">Senior center</option>
+          <option value="library">Public library</option>
+          <option value="healthcare">Healthcare organization</option>
+          <option value="family">Family member</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Tell us a little about your organization and how you'd like to use Sage..."></textarea>
+      </div>
+      <button type="submit">Send message</button>
+    </form>
+    <p class="alt-contact">Or email directly: <a href="mailto:cascade@unc.edu">cascade@unc.edu</a></p>
+  </div>
+
+  <footer>
+    Built by Brandon Cascade &nbsp;·&nbsp; <span>Sage</span> &nbsp;·&nbsp; Chapel Hill, NC
+  </footer>
+
+</body>
+</html>
